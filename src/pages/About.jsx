@@ -4,6 +4,8 @@ import 'react-vertical-timeline-component/style.min.css';
 
 import { skills, proglangs, experiences } from '../constants'
 import CTA from '../components/CTA';
+import DownloadResume from '../components/DownloadResume';
+import Footer from '../components/Footer';
 
 const About = () => {
   return (
@@ -107,7 +109,11 @@ const About = () => {
       </div>
 
        <hr className='border-slate-200 mt-7' />
+       <DownloadResume />
+       <hr className='border-slate-200 mt-7' />
        <CTA />
+       <hr className='border-slate-200 mt-7' />
+       <Footer/>
     </section>
   );
 }

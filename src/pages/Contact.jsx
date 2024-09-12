@@ -6,6 +6,7 @@ import Fox from '../models/Fox';
 import Loader from '../components/Loader';
 import useAlert from '../hooks/useAlert';
 import Alert from '../components/Alert';
+import Footer from '../components/Footer';
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -68,6 +69,7 @@ const Contact = () => {
   };
 
   return (
+    <div className="fullcontainer">
     <section className="relative flex lg:flex-row flex-col max-container">
    {alert.show && <Alert {...alert} />}
 
@@ -75,9 +77,9 @@ const Contact = () => {
         <h1 className="head-text">Get In Touch</h1>
 
         <form
-          ref={formRef} // Added ref to the form
-          className="w-full flex flex-col gap-7 mt-14"
-          onSubmit={handleSubmit} // Added onSubmit handler
+          ref={formRef} 
+          className="w-full flex flex-col gap-7 mt-11"
+          onSubmit={handleSubmit} 
         >
           <label className="text-black-500 font-semibold">
             Name
@@ -152,7 +154,12 @@ const Contact = () => {
           </Suspense>
          </Canvas>
       </div>
+
     </section>
+
+    <Footer />
+    <br />
+    </div>
   );
 };
 

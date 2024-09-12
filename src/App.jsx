@@ -1,6 +1,8 @@
 import { Route, BrowserRouter as Router, Routes  } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import {Home, About, Projects, Contact} from './pages';
+import Footer from "./components/Footer";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App = () => {
 

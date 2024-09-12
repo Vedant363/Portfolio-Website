@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@react-spring/three": "^9.7.4",
     "@react-three/drei": "^9.109.2",
     "@react-three/fiber": "^8.16.8",
+    "pdfjs-dist": "^4.6.82",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.0",
