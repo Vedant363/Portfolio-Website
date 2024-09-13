@@ -6,11 +6,14 @@ import { skills, proglangs, experiences, education } from '../constants'
 import CTA from '../components/CTA';
 import DownloadResume from '../components/DownloadResume';
 import Footer from '../components/Footer';
+import { useTheme } from '../ThemeContext';
 
 const About = () => {
+   const { theme } = useTheme();
+
   return (
     <section className="max-container">
-      <h1 className="head-text">
+      <h1 className={`head-text ${theme}-headtext`}>
         Hello, I'm{" "}
         <span className="blue-gradient_text font-semibold drop-shadow">
           Vedant{" "}
@@ -18,7 +21,7 @@ const About = () => {
         👋🏼
       </h1>
 
-      <div className="mt-5 flex flex-col gap-3 text-slate-500">
+      <div className={`mt-5 flex flex-col gap-3 ${theme === 'light' ? 'text-slate-500' : 'text-slate-100' } `}>
         <p>
           Software engineer based in India, specializing in technical education
           through hands-on learning and building application.
@@ -26,7 +29,7 @@ const About = () => {
       </div>
 
       <div className="py-10 flex flex-col">
-        <h3 className="subhead-text">Skills</h3>
+        <h3 className={`subhead-text ${theme}-subheadtext`}>Skills</h3>
 
         <div className="mt-16 flex flex-wrap gap-12">
           {skills.map((skill, index) => (
@@ -45,7 +48,7 @@ const About = () => {
       </div>
 
       <div className="py-10 flex flex-col">
-        <h3 className="subhead-text">Programming Languages</h3>
+        <h3 className={`subhead-text ${theme}-subheadtext`}>Programming Languages</h3>
 
         <div className="mt-16 flex flex-wrap gap-12">
           {proglangs.map((skill, index) => (
@@ -64,42 +67,41 @@ const About = () => {
       </div>
 
       <div className="py-16">
-        <h3 className="subhead-text">About Me</h3>
+        <h3 className={`subhead-text ${theme}-subheadtext`}>About Me</h3>
       </div>
 
       <div className="mt-7 flex">
-        <VerticalTimeline>
-          {education.map((edu, index) => (
-            <VerticalTimelineElement
-             key={edu.title}
-             date={edu.year}
-             contentStyle={{
-              borderBottom: '8px',
-              borderStyle: 'solid',
-              borderBottomColor: edu.iconBg,
-              boxShadow: 'none'
-             }}
-             iconStyle={{background: edu.iconBg}}
-            >
-              <div>
-                <h3 className='text-black text-xl font-poppins font-semibold'>
-                  {edu.title}
-                </h3>
-                <h4 className='text-black-500 font-medium font-base' style={{margin: 0}}>
-                  {edu.name}
-                </h4>
-                <h6 className='text-black-500 font-small' style={{margin: 0}}>
-                  {edu.grade}
-                </h6>
-              </div>
-
-              <ul className='my-5 list-disc ml-5 space-y-2'>
-
-              </ul>
-            </VerticalTimelineElement>
-          ))}
-            
-        </VerticalTimeline>
+      <VerticalTimeline>
+      {education.map((edu, index) => (
+        <VerticalTimelineElement
+          key={edu.title}
+          date={edu.year}
+          dateClassName={`text-${theme === 'light' ? 'black' : 'white'} text-xs`}
+          contentStyle={{
+            borderBottom: '8px',
+            borderStyle: 'solid',
+            borderBottomColor: theme === 'light' ? edu.iconBg : edu.iconBg, // Darker border color in dark theme
+            boxShadow: 'none',
+            background: theme === 'light' ? '' : '#32364a' // Change background based on theme
+          }}
+          iconStyle={{
+            background: theme === 'light' ? edu.iconBg : edu.iconBg // Change icon background based on theme
+          }}
+        >
+          <div>
+            <h3 className={`text-${theme === 'light' ? 'black' : 'white'} text-xl font-poppins font-semibold`}>
+              {edu.title}
+            </h3>
+            <h4 className={`text-${theme === 'light' ? 'black' : 'white'} font-medium font-base`} style={{ margin: 0 }}>
+              {edu.name}
+            </h4>
+            <h6 className={`text-${theme === 'light' ? 'black' : 'white'} text-sm font-light`} style={{ margin: 0 }}>
+              {edu.grade}
+            </h6>
+          </div>
+        </VerticalTimelineElement>
+      ))}
+    </VerticalTimeline>
       </div>
 
        <hr className='border-slate-200 mt-7' />

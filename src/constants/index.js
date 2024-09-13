@@ -28,8 +28,23 @@ import {
     chat,
     fashion,
     fms,
-    todo
+    todo,
+    sun,
+    moon
 } from "../assets/icons";
+
+export const buttons = [
+    {
+        name: "Light Mode",
+        icon: sun,
+        theme: "btn-back-yellow",
+    },
+    {
+        name: "Dark Mode",
+        icon: moon,
+        theme: "btn-back-blue",
+    },
+];
 
 export const skills = [
     {

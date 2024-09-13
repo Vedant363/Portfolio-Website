@@ -1,22 +1,25 @@
 import { Link } from 'react-router-dom';
 import {projects} from '../constants';
-import { arrow, github } from '../assets/icons';
+import { arrow, github, githublight } from '../assets/icons';
 import CTA from '../components/CTA';
 import Footer from '../components/Footer';
+import { useTheme } from '../ThemeContext';
 
 const Projects = () => {
+  const { theme } = useTheme();
+  
   return (
     <section className="max-container">
-      <h1 className="head-text">
+      <h1 className={`head-text ${theme}-headtext`}>
         My{" "}
         <span className="blue-gradient_text font-semibold drop-shadow">
           Projects
         </span>
       </h1>
 
-      <div className="mt-5 flex flex-col gap-3 text-slate-500">
+      <div className={`mt-5 flex flex-col gap-3 ${theme === 'light' ? 'text-slate-500' : 'text-slate-100' }`}>
         <p>
-          I have built a few projects that I am proud of. Here are some of them:
+          Here are some of the projects I have built:
         </p>
       </div>
 
@@ -37,10 +40,10 @@ const Projects = () => {
               </div>
             </div>
             <div className="mt-5 flex flex-col">
-              <h4 className="text-2xl font-poppins font-semibold">
+              <h4 className={`${theme === 'light' ? '' : 'text-white' } text-2xl font-poppins font-semibold`}>
                 {project.name}
               </h4>
-              <p className="mt-2 text-slate-500">{project.description}</p>
+              <p className={`${theme === 'light' ? 'text-slate-500' : 'text-white' } mt-2 `}>{project.description}</p>
 
               <div className="linkcontainer flex justify-between">
                 {project.link ? (
@@ -68,7 +71,7 @@ const Projects = () => {
                   rel="noopener noreferrer"
                 >
                   <div className="bg-transparent mt-4">
-                    <img src={github} alt="Github Link" className="w-8 h-8" />
+                    <img src={theme === 'light' ? github : githublight} alt="Github Link" className="w-8 h-8" />
                   </div>
                 </Link>
               </div>

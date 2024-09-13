@@ -35,6 +35,10 @@ import ecom from './ecom.svg'
 import fashion from './fashion.svg'
 import fms from './fms.svg'
 import todo from './todo.svg'
+import sun from './sun.svg'
+import moon from './moon.svg'
+import githublight from './githublight.svg'
+import arrowdown from './arrowdown.svg'
 
 export {
     css,
@@ -73,5 +77,9 @@ export {
     ecom,
     fashion,
     fms,
-    todo
+    todo,
+    sun,
+    moon,
+    githublight,
+    arrowdown
 }

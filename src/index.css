@@ -29,9 +29,31 @@ body:has(.card[data-color="green"]:hover) {
   .head-text {
     @apply sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins;
   }
+  .head-text.light-headtext {
+    @apply sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins;
+  }
+  .head-text.dark-headtext {
+    @apply text-white sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins;
+  }
+
+  .head-text.light-headtext {
+    @apply sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins;
+  }
+
+  .head-text.dark-headtext {
+    @apply text-white sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins;
+  }
 
   .subhead-text {
     @apply font-semibold sm:text-3xl text-xl relative font-poppins;
+  }
+
+  .subhead-text.light-subheadtext {
+    @apply font-semibold sm:text-3xl text-xl relative font-poppins;
+  }
+
+  .subhead-text.dark-subheadtext {
+    @apply text-white font-semibold sm:text-3xl text-xl relative font-poppins;
   }
 
   .blue-gradient_text {
@@ -41,9 +63,21 @@ body:has(.card[data-color="green"]:hover) {
   .input {
     @apply bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card outline-none;
   }
+  .input.light-input {
+    @apply bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card outline-none;
+  }
+  .input.dark-input {
+    @apply bg-slate-600 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card outline-none;
+  }
 
   .textarea {
     @apply block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 mt-2.5 font-normal shadow-card outline-none overflow-x-hidden overflow-clip;
+  }
+  .textarea.light-textarea {
+    @apply block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 mt-2.5 font-normal shadow-card outline-none overflow-x-hidden overflow-clip;
+  }
+  .textarea.dark-textarea {
+    @apply block p-2.5 w-full text-sm text-gray-900 bg-slate-600 rounded-lg border border-gray-600 focus:ring-blue-500 focus:border-blue-500 mt-2.5 font-normal shadow-card outline-none overflow-x-hidden overflow-clip;
   }
 
   .btn {
@@ -62,8 +96,24 @@ body:has(.card[data-color="green"]:hover) {
     @apply mt-2 rounded-full flex justify-between items-center sm:px-16 px-8 py-4 max-w-5xl mx-auto fixed top-0 z-50 right-0 left-0;
   }
 
+  .light-theme .header {
+    @apply mt-2 rounded-full flex justify-between items-center sm:px-16 px-8 py-4 max-w-5xl mx-auto fixed top-0 z-50 right-0 left-0;
+  }
+
+  .dark-theme .header {
+    @apply mt-2 rounded-full flex justify-between items-center sm:px-16 px-8 py-4 max-w-5xl mx-auto fixed top-0 z-50 right-0 left-0;
+  }
+
   .header-fixed {
     @apply flex bg-gray-300 justify-between items-center sm:px-16 px-8 py-4 w-full h-11 fixed top-0 z-50 right-0;
+  }
+
+  .header-fixed.light-theme  {
+    @apply flex bg-gray-300 justify-between items-center sm:px-16 px-8 py-4 w-full h-11 fixed top-0 z-50 right-0;
+  }
+
+  .header-fixed.dark-theme  {
+    @apply flex bg-slate-700 justify-between items-center sm:px-16 px-8 py-4 w-full h-11 fixed top-0 z-50 right-0;
   }
 
   .footer {
@@ -89,6 +139,14 @@ body:has(.card[data-color="green"]:hover) {
   .cta-text {
     @apply text-black-500 font-semibold font-worksans flex-1 text-3xl max-md:text-center;
   }
+  .cta-text.light-ctatext {
+    @apply text-black-500 font-semibold font-worksans flex-1 text-3xl max-md:text-center;
+  }
+  .cta-text.dark-ctatext {
+    @apply text-white font-semibold font-worksans flex-1 text-3xl max-md:text-center;
+  }
+
+
 }
 
 .glassmorphism {
@@ -213,6 +271,28 @@ body:has(.card[data-color="green"]:hover) {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.formcontainer.light-formcontainer {
+  padding: 20px;
+  border-top: 1px transparent #4a4a4a;
+  border-left: 1px transparent #4a4a4a;
+  border-bottom: 1px transparent #4a4a4a;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(160, 160, 160, 0.9));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formcontainer.dark-formcontainer {
+  padding: 20px;
+  border-top: 1px transparent #4a4a4a;
+  border-left: 1px transparent #4a4a4a;
+  border-bottom: 1px transparent #4a4a4a;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: linear-gradient(135deg, rgba(87, 86, 86, 0.8), rgba(30, 30, 30, 0.9));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .imgcontainer {
   background-image: url('/road3.jpeg');
   background-size: cover;
@@ -224,4 +304,19 @@ body:has(.card[data-color="green"]:hover) {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Define keyframes for the bouncing effect */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Apply animation to the arrow image */
+.bouncing {
+  animation: bounce 1s infinite;
 }

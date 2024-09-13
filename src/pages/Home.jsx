@@ -8,7 +8,7 @@ import Plane from "../models/Plane"
 import HomeInfo from "../components/HomeInfo"
 
 import sakura from "../assets/sakura.mp3"
-import { soundoff, soundon } from "../assets/icons"
+import { soundoff, soundon, arrowdown } from "../assets/icons"
 
 const Home = () => {
   const audioRef = useRef(new Audio(sakura));
@@ -17,8 +17,8 @@ const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
 
-  const [isPlayingMusic, setIsPlayingMusic] = useState(true);
-
+  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  
   useEffect(()=>{
     if(isPlayingMusic){
       audioRef.current.play();
@@ -95,6 +95,7 @@ const Home = () => {
       </Canvas>
 
       <div className="absolute bottom-2 left-2">
+        {!isPlayingMusic && <img src= {arrowdown} alt="click here" className="w-9 h-3 bouncing"></img>}
         <img src={!isPlayingMusic ? soundoff : soundon} alt="sound" className="w-10 h-10 cursor-pointer object-contain" onClick={()=>setIsPlayingMusic(!isPlayingMusic)}/>
       </div>
     </section>

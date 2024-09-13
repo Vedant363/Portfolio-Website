@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import ViewOnGoogleDocs from './ViewOnGoogleDocs';
+import { useTheme } from '../ThemeContext';
 
 const DownloadResume = () => {
+   const { theme } = useTheme();
+
   const [isVisible, setIsVisible] = useState(false);
 
   const pdfUrl = '/resume.pdf'; 
@@ -9,7 +12,7 @@ const DownloadResume = () => {
   return (
     <div className="view-pdf mt-11 mb-11">
     <div className="show gap-3 flex-col flex-wrap flex sm:flex-row sm:flex-nowrap">
-      <p className='cta-text'>My Resume <br className='sm:block hidden'/></p>
+      <p className={`cta-text ${theme}-ctatext`}>My Resume <br className='sm:block hidden'/></p>
       {isVisible && <ViewOnGoogleDocs />}
       <button
         onClick={() => setIsVisible(!isVisible)}

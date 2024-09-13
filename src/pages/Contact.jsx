@@ -7,8 +7,10 @@ import Loader from '../components/Loader';
 import useAlert from '../hooks/useAlert';
 import Alert from '../components/Alert';
 import Footer from '../components/Footer';
+import { useTheme } from '../ThemeContext';
 
 const Contact = () => {
+  const { theme } = useTheme();
   const formRef = useRef(null);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
@@ -77,7 +79,7 @@ const Contact = () => {
       <section className="relative flex lg:flex-row flex-col max-container ">
         {alert.show && <Alert {...alert} />}
 
-        <div className="formcontainer flex-1 min-w-[50%] flex flex-col">
+        <div className={`formcontainer ${theme}-formcontainer flex-1 min-w-[50%] flex flex-col`}>
           <h1 className="head-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 bg-clip-text text-transparent">Get In Touch</h1>
 
           <form
@@ -85,12 +87,12 @@ const Contact = () => {
             className="w-full flex flex-col gap-7 mt-11"
             onSubmit={handleSubmit} 
           >
-            <label className="text-black-500 font-semibold">
+            <label className={`${theme === 'light' ? 'text-black-500' : 'text-white'} font-semibold`}>
               Name
               <input
                 type="text"
                 name="name"
-                className="input"
+                className={`input ${theme}-input`}
                 placeholder="Enter your name"
                 required
                 value={form.name}
@@ -99,12 +101,12 @@ const Contact = () => {
                 onBlur={handleBlur}
               />
             </label>
-            <label className="text-black-500 font-semibold">
+            <label className={`${theme === 'light' ? 'text-black-500' : 'text-white'} font-semibold`}>
               Email
               <input
                 type="email"
                 name="email"
-                className="input"
+                className={`input ${theme}-input`}
                 placeholder="Enter your Email"
                 required
                 value={form.email}
@@ -113,12 +115,12 @@ const Contact = () => {
                 onBlur={handleBlur}
               />
             </label>
-            <label className="text-black-500 font-semibold">
+            <label className={`${theme === 'light' ? 'text-black-500' : 'text-white'} font-semibold`}>
               Your Message
               <textarea
                 name="message"
                 rows={4}
-                className="textarea resize-none overflow-hidden" 
+                className={`textarea ${theme}-textarea resize-none overflow-hidden`} 
                 placeholder="Enter your Message"
                 required
                 value={form.message}
