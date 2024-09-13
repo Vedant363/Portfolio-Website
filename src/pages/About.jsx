@@ -2,7 +2,7 @@ import React from 'react';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
-import { skills, proglangs, experiences } from '../constants'
+import { skills, proglangs, experiences, education } from '../constants'
 import CTA from '../components/CTA';
 import DownloadResume from '../components/DownloadResume';
 import Footer from '../components/Footer';
@@ -64,33 +64,33 @@ const About = () => {
       </div>
 
       <div className="py-16">
-        <h3 className="subhead-text">Timeline of my Journey</h3>
+        <h3 className="subhead-text">About Me</h3>
       </div>
 
-      <div className="mt-12 flex">
+      <div className="mt-7 flex">
         <VerticalTimeline>
-          {experiences.map((experience, index) => (
+          {education.map((edu, index) => (
             <VerticalTimelineElement
-             key={experience.company_name}
-             date={experience.date}
-             icon={<div className='flex justify-center items-center w-full h-full'>
-              <img src={experience.icon} alt={experience.company_name} className='w-[60%] h-[60%] object-contain' />
-             </div>}
+             key={edu.title}
+             date={edu.year}
              contentStyle={{
               borderBottom: '8px',
               borderStyle: 'solid',
-              borderBottomColor: experience.iconBg,
+              borderBottomColor: edu.iconBg,
               boxShadow: 'none'
              }}
-             iconStyle={{background: experience.iconBg}}
+             iconStyle={{background: edu.iconBg}}
             >
               <div>
                 <h3 className='text-black text-xl font-poppins font-semibold'>
-                  {experience.title}
+                  {edu.title}
                 </h3>
-                <p className='text-black-500 font-medium font-base' style={{margin: 0}}>
-                  {experience.company_name}
-                </p>
+                <h4 className='text-black-500 font-medium font-base' style={{margin: 0}}>
+                  {edu.name}
+                </h4>
+                <h6 className='text-black-500 font-small' style={{margin: 0}}>
+                  {edu.grade}
+                </h6>
               </div>
 
               <ul className='my-5 list-disc ml-5 space-y-2'>

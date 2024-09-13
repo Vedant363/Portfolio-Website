@@ -22,7 +22,10 @@ const Projects = () => {
 
       <div className="flex flex-wrap my-20 gap-16">
         {projects.map((project, index) => (
-          <div className="border-2 border-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-lg shadow-md shadow-blue-500 p-6 lg:w-[400px] w-full" key={index}>
+          <div 
+          className="border-2 border-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-lg shadow-md shadow-blue-500 p-6 lg:w-[400px] w-full transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500 hover:cursor-default" 
+          key={index}
+        >        
             <div className="block-container w-12 h-12">
               <div className={`btn-back rounded-xl ${project.theme}`} />
               <div className="btn-front rounded-xl flex justify-center items-center">
