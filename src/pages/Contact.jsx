@@ -74,7 +74,8 @@ const Contact = () => {
    {alert.show && <Alert {...alert} />}
 
       <div className="flex-1 min-w-[50%] flex flex-col">
-        <h1 className="head-text">Get In Touch</h1>
+      <h1 className="head-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 bg-clip-text text-transparent">Get In Touch</h1>
+
 
         <form
           ref={formRef} 

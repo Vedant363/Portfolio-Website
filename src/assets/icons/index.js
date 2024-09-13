@@ -30,6 +30,11 @@ import c from './c.svg'
 import cpp from './cpp.svg'
 import java from './java.svg'
 import python from './python.svg'
+import chat from './chat.svg'
+import ecom from './ecom.svg'
+import fashion from './fashion.svg'
+import fms from './fms.svg'
+import todo from './todo.svg'
 
 export {
     css,
@@ -63,5 +68,10 @@ export {
     c,
     cpp,
     java,
-    python
+    python,
+    chat,
+    ecom,
+    fashion,
+    fms,
+    todo
 }

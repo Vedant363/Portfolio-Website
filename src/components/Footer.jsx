@@ -15,7 +15,7 @@ const Footer = () => {
             <a href="mailto:vedant.ghumade363@gmail.com" className="hover:text-white transition-colors">
               <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Gmail" className="w-6 h-6" />
             </a>
-            <a href="https://leetcode.com/vedant_363" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+            <a href="https://leetcode.com/u/vedant__363/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
               <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" alt="LeetCode" className="w-6 h-6" />
             </a>
         </div>

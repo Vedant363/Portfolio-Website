@@ -23,7 +23,12 @@ import {
     summiz,
     tailwindcss,
     threads,
-    typescript
+    typescript,
+    ecom,
+    chat,
+    fashion,
+    fms,
+    todo
 } from "../assets/icons";
 
 export const skills = [
@@ -206,45 +211,43 @@ export const socialLinks = [
 
 export const projects = [
     {
-        iconUrl: pricewise,
-        theme: 'btn-back-red',
-        name: 'Amazon Price Tracker',
-        description: 'Developed a web application that tracks and notifies users of price changes for products on Amazon, helping users find the best deals.',
-        link: 'https://github.com/adrianhajdin/pricewise',
-    },
-    {
-        iconUrl: threads,
-        theme: 'btn-back-green',
-        name: 'Full Stack Threads Clone',
-        description: 'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
-        link: 'https://github.com/adrianhajdin/threads',
-    },
-    {
-        iconUrl: car,
+        iconUrl: ecom,
         theme: 'btn-back-blue',
-        name: 'Car Finding App',
-        description: 'Designed and built a mobile app for finding and comparing cars on the market, streamlining the car-buying process.',
-        link: 'https://github.com/adrianhajdin/project_next13_car_showcase',
+        name: 'Urbanic - E-Commerce Website',
+        description: 'Urbanic is a premium shopping website built with Node.js, Express.js, and MongoDB. It offers a robust backend system for seamless user authentication, product management, and secure transactions.',
+        link: 'https://urbanic-shopping-store.onrender.com/',
+        githublink : 'https://github.com/Vedant363/Urbanic-Shopping-Store',
     },
     {
-        iconUrl: snapgram,
-        theme: 'btn-back-pink',
-        name: 'Full Stack Instagram Clone',
-        description: 'Built a complete clone of Instagram, allowing users to share photos and connect with friends in a familiar social media environment.',
-        link: 'https://github.com/adrianhajdin/social_media_app',
-    },
-    {
-        iconUrl: estate,
-        theme: 'btn-back-black',
-        name: 'Real-Estate Application',
-        description: 'Developed a web application for real estate listings, facilitating property searches and connecting buyers with sellers.',
-        link: 'https://github.com/adrianhajdin/projects_realestate',
-    },
-    {
-        iconUrl: summiz,
+        iconUrl: chat,
         theme: 'btn-back-yellow',
-        name: 'AI Summarizer Application',
-        description: 'App that leverages AI to automatically generate concise & informative summaries from lengthy text content, or blogs.',
-        link: 'https://github.com/adrianhajdin/project_ai_summarizer',
+        name: 'ChatBlaze - RealTime Chat Application',
+        description: 'ChatBlaze is a modern chat application built using React and Firebase. This application leverages Firebase Functionalities to provide a seamless and efficient chat experience.',
+        link: 'https://chatblaze-ca40e.web.app/',
+        githublink: 'https://github.com/Vedant363/ChatBlaze',
+    },
+    {
+        iconUrl: fashion,
+        theme: 'btn-back-red',
+        name: 'Fashion Recommender System',
+        description: 'Fashion Recommender System suggests clothing items to users based on the uploaded image and other relevant factors.',
+        link: '',
+        githublink: 'https://github.com/Vedant363/Fashion-Recommender-System',
+    },
+    {
+        iconUrl: fms,
+        theme: 'btn-back-dark-blue',
+        name: 'Flight Management System',
+        description: 'Flight Management System(FMS) is a Java-based application designed to manage flight records and employee details related to flight for companies.',
+        link: '',
+        githublink: 'https://github.com/Vedant363/Flight-Management-System',
+    },
+    {
+        iconUrl: todo,
+        theme: 'btn-back-green',
+        name: 'Todo Manager',
+        description: 'A React application designed to help users manage their tasks efficiently, it provides features to add, edit, delete, and mark tasks as completed.',
+        link: 'https://todo-manager-vedant363.netlify.app/',
+        githublink: 'https://github.com/Vedant363/Todo-Manager',
     }
 ];
