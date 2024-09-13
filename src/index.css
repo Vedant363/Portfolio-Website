@@ -214,7 +214,7 @@ body:has(.card[data-color="green"]:hover) {
 }
 
 .imgcontainer {
-  background-image: url('road3.jpeg');
+  background-image: url('/road3.jpeg');
   background-size: cover;
   background-position: center;
   padding: 20px;
