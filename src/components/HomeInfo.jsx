@@ -22,7 +22,7 @@ const renderContent = {
     ),
     2: (
         <InfoBox 
-          text="Currently pursuing B.Tech in Computer Science and Engineering from PCCOE."
+          text="Currently pursuing B.Tech in Computer Engineering from PCCOE."
           link='/about'
           btnText='Learn More'
         />

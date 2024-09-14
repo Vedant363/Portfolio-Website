@@ -8,18 +8,22 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 
 import islandScene from '../assets/3d/island.glb';
-import {a} from '@react-spring/three';
+import { a } from '@react-spring/three';
 
 
-const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props}) => {
+const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
-  const { gl, viewport} = useThree();
+  const { gl, viewport } = useThree();
   const islandRef = useRef();
   const { nodes, materials } = useGLTF(islandScene);
 
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
+
+  // New state for auto-rotation
+  const autoRotate = useRef(true);
+  const autoRotationSpeed = -0.002; // Adjust this value to change the speed
 
   const handlePointerDown = (e) => {
     e.stopPropagation();
@@ -73,47 +77,69 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props}) => {
   }
   
   useFrame(() => {
-    if(!isRotating) {
+    if (autoRotate.current) {
+      // Apply auto-rotation
+      islandRef.current.rotation.y += autoRotationSpeed;
+    } else if (!isRotating) {
+      // Apply damping when manual rotation stops
       rotationSpeed.current *= dampingFactor;
 
-      if(Math.abs(rotationSpeed.current) < 0.001) {
+      if (Math.abs(rotationSpeed.current) < 0.001) {
         rotationSpeed.current = 0;
       }
 
       islandRef.current.rotation.y += rotationSpeed.current;
-    } else {
-      const rotation = islandRef.current.rotation.y;
+    }
 
-      const normalizedRotation =
-        ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+    const rotation = islandRef.current.rotation.y;
 
-      // Set the current stage based on the island's orientation
-      switch (true) {
-        case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
-          setCurrentStage(4);
-          break;
-        case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
-          setCurrentStage(3);
-          break;
-        case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
-          setCurrentStage(2);
-          break;
-        case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
-          setCurrentStage(1);
-          break;
-        default:
-          setCurrentStage(null);
-      }
+    const normalizedRotation =
+      ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+
+    // Set the current stage based on the island's orientation
+    switch (true) {
+      case normalizedRotation >= 5.1 && normalizedRotation <= 6.1:
+        setCurrentStage(4);
+        break;
+      case normalizedRotation >= 0.5 && normalizedRotation <= 1.5:
+        setCurrentStage(3);
+        break;
+      case normalizedRotation >= 2.1 && normalizedRotation <= 3.1:
+        setCurrentStage(2);
+        break;
+      case normalizedRotation >= 3.9 && normalizedRotation <= 4.9:
+        setCurrentStage(1);
+        break;
+      default:
+        setCurrentStage(null);
     }
   });
 
+
   useEffect(() => {
     const canvas = gl.domElement;
+    
+    const handleInteraction = () => {
+      // Disable auto-rotation when user interacts
+      autoRotate.current = false;
+      // Re-enable auto-rotation after 5 seconds of inactivity
+      setTimeout(() => {
+        autoRotate.current = true;
+      }, 3000);
+    };
+
     canvas.addEventListener('pointerdown', handlePointerDown);
     canvas.addEventListener('pointerup', handlePointerUp);
     canvas.addEventListener('pointermove', handlePointerMove);
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
+
+    // Add event listeners for disabling auto-rotation on interaction
+    canvas.addEventListener('pointerdown', handleInteraction);
+    canvas.addEventListener('pointerup', handleInteraction);
+    canvas.addEventListener('pointermove', handleInteraction);
+    document.addEventListener('keydown', handleInteraction);
+    document.addEventListener('keyup', handleInteraction);
 
     return () => {
       canvas.removeEventListener('pointerdown', handlePointerDown);
@@ -121,6 +147,13 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props}) => {
       canvas.removeEventListener('pointermove', handlePointerMove);
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
+
+      // Remove event listeners for auto-rotation handling
+      canvas.removeEventListener('pointerdown', handleInteraction);
+      canvas.removeEventListener('pointerup', handleInteraction);
+      canvas.removeEventListener('pointermove', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+      document.removeEventListener('keyup', handleInteraction);
     }
   }, [gl, handlePointerDown, handlePointerUp, handlePointerMove]);
 
