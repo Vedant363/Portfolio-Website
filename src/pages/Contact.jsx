@@ -8,6 +8,7 @@ import useAlert from '../hooks/useAlert';
 import Alert from '../components/Alert';
 import Footer from '../components/Footer';
 import { useTheme } from '../ThemeContext';
+import Footerformobile from '../components/Footerformobile';
 
 const Contact = () => {
   const { theme } = useTheme();
@@ -15,6 +16,16 @@ const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState('idle');
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+   
+  useEffect(() => {
+   const handleResize = () => {
+     setIsSmallScreen(window.innerWidth < 768);
+   };
+
+   window.addEventListener('resize', handleResize);
+   return () => window.removeEventListener('resize', handleResize);
+ }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -75,7 +86,8 @@ const Contact = () => {
   };
 
   return (
-    <div className="fullcontainer glassmorphism">
+
+    <div className={`fullcontainer glassmorphism ${isSmallScreen ? '' : 'pb-5'}`}>
       <section className="relative flex lg:flex-row flex-col max-container ">
         {alert.show && <Alert {...alert} />}
 
@@ -162,8 +174,8 @@ const Contact = () => {
           </Canvas>
         </div>
       </section>
-      <Footer />
       <br />
+      {isSmallScreen ? <Footerformobile/> : <Footer />}
     </div>
   );
 };

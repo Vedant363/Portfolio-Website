@@ -108,12 +108,24 @@ body:has(.card[data-color="green"]:hover) {
     @apply flex bg-gray-300 justify-between items-center sm:px-16 px-8 py-4 w-full h-11 fixed top-0 z-50 right-0;
   }
 
+  .header-fixed-small{
+    @apply flex bg-gray-300 justify-between items-center sm:px-16 px-8 py-4 w-full h-[62px] fixed top-0 z-50 right-0;
+  }
+
   .header-fixed.light-theme  {
     @apply flex bg-gray-300 justify-between items-center sm:px-16 px-8 py-4 w-full h-11 fixed top-0 z-50 right-0;
   }
 
+  .header-fixed-small.light-theme{
+    @apply flex bg-gray-300 justify-between items-center sm:px-16 px-8 py-4 w-full h-[62px] fixed top-0 z-50 right-0;
+  }
+
   .header-fixed.dark-theme  {
     @apply flex bg-slate-700 justify-between items-center sm:px-16 px-8 py-4 w-full h-11 fixed top-0 z-50 right-0;
+  }
+
+  .header-fixed-small.dark-theme{
+    @apply flex bg-gray-300 justify-between items-center sm:px-16 px-8 py-4 w-full h-[62px] fixed top-0 z-50 right-0;
   }
 
   .footer {
@@ -146,8 +158,24 @@ body:has(.card[data-color="green"]:hover) {
     @apply text-white font-semibold font-worksans flex-1 text-3xl max-md:text-center;
   }
 
+  .footer.footerformobile {
+    @apply bottom-9 right-0 left-0 bg-red-500;
+  }
 
 }
+
+
+.top-right-block {
+  position: fixed;
+  top: calc(100% + 1rem); /* Adjust this value based on your header height */
+  right: 1rem; /* Adjust spacing from the right side */
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  /* Ensure it's visible and not hidden or positioned off-screen */
+}
+
 
 .glassmorphism {
   background: rgba(8, 116, 239, 0.07);
@@ -320,3 +348,4 @@ body:has(.card[data-color="green"]:hover) {
 .bouncing {
   animation: bounce 1s infinite;
 }
+

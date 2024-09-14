@@ -39,6 +39,7 @@ import sun from './sun.svg'
 import moon from './moon.svg'
 import githublight from './githublight.svg'
 import arrowdown from './arrowdown.svg'
+import menu from './menu.svg'
 
 export {
     css,
@@ -81,5 +82,6 @@ export {
     sun,
     moon,
     githublight,
-    arrowdown
+    arrowdown,
+    menu
 }

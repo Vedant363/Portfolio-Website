@@ -35,7 +35,7 @@ const Home = () => {
     let rotation = [0.1,4.7,0];
 
     if(window.innerWidth < 768){
-      screenScale = [0.9,0.9,0.9];
+      screenScale = [0.4,0.5,0.5];
       screenPosition = [0, -6.5, -43];
     }else{
       screenScale = [1,1,1];
@@ -47,7 +47,7 @@ const Home = () => {
     let screenScale, screenPosition;
 
     if(window.innerWidth < 768){
-      screenScale = [1.5, 1.5, 1.5];
+      screenScale = [1.0, 1.0, 1.0];
       screenPosition = [0, -1.5, 0];
     }else{
       screenScale = [3,3,3];
@@ -60,12 +60,12 @@ const Home = () => {
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
   return (
-    <section className="w-full h-screen relative">
+    <section className="w-[385px] h-[720px] sm:w-full sm:h-screen relative">
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <HomeInfo currentStage={currentStage} />}
       </div>
       <Canvas 
-      className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
+      className={`w-[385px] h-[720px] sm:w-full sm:h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
       camera={{near: 0.1, far: 1000}}
       >
         <Suspense fallback={<Loader />}>

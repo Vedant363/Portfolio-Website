@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ViewOnGoogleDocs from './ViewOnGoogleDocs';
 import { useTheme } from '../ThemeContext';
 
-const DownloadResume = () => {
+const DownloadResume = ({screenSize}) => {
    const { theme } = useTheme();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -28,7 +28,7 @@ const DownloadResume = () => {
           src={pdfUrl}
           title="Resume"
           width="100%"
-          height="1190px"
+          height={`${screenSize ? '400px' : '1190px'}`}
           className="mt-4 border border-blue-800 shadow-blue-600 shadow-xl"
           allowFullScreen
         />

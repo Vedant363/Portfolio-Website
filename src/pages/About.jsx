@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
@@ -7,11 +7,27 @@ import CTA from '../components/CTA';
 import DownloadResume from '../components/DownloadResume';
 import Footer from '../components/Footer';
 import { useTheme } from '../ThemeContext';
+import Footerformobile from '../components/Footerformobile';
 
 const About = () => {
    const { theme } = useTheme();
+   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+   
+   useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
+    <div className={`${isSmallScreen ? '' : 'pb-5'}`}>
     <section className="max-container">
       <h1 className={`head-text ${theme}-headtext`}>
         Hello, I'm{" "}
@@ -33,7 +49,7 @@ const About = () => {
 
         <div className="mt-16 flex flex-wrap gap-12">
           {skills.map((skill, index) => (
-            <div className="block-container w-20 h-20">
+            <div className={`block-container ${isSmallScreen ? 'w-[70px]' : 'w-20'}  h-20`}>
               <div className="btn-back rounded-xl" />
               <div className="btn-front rounded-xl flex justify-center items-center">
                 <img
@@ -52,7 +68,7 @@ const About = () => {
 
         <div className="mt-16 flex flex-wrap gap-12">
           {proglangs.map((skill, index) => (
-            <div className="block-container w-20 h-20">
+            <div className={`block-container ${isSmallScreen ?  'w-[120px]' : 'w-20'}  h-20`}>
               <div className="btn-back rounded-xl" />
               <div className="btn-front rounded-xl flex justify-center items-center">
                 <img
@@ -105,12 +121,13 @@ const About = () => {
       </div>
 
        <hr className='border-slate-200 mt-7' />
-       <DownloadResume />
+       <DownloadResume screenSize={isSmallScreen} />
        <hr className='border-slate-200 mt-7' />
        <CTA />
        <hr className='border-slate-200 mt-7' />
-       <Footer/>
     </section>
+       {isSmallScreen ? <Footerformobile /> : <Footer />}
+    </div>
   );
 }
 

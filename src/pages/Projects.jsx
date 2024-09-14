@@ -4,11 +4,28 @@ import { arrow, github, githublight } from '../assets/icons';
 import CTA from '../components/CTA';
 import Footer from '../components/Footer';
 import { useTheme } from '../ThemeContext';
+import { useEffect, useState } from 'react';
+import Footerformobile from '../components/Footerformobile';
 
 const Projects = () => {
   const { theme } = useTheme();
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+   
+   useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   return (
+    <div className={`${theme === 'light' ? 'bg-slate-300/20' : 'bg-black'} ${isSmallScreen ? '' : 'pb-5'}`}>
     <section className="max-container">
       <h1 className={`head-text ${theme}-headtext`}>
         My{" "}
@@ -84,8 +101,9 @@ const Projects = () => {
 
       <CTA />
       <hr className="border-slate-200" />
-      <Footer />
     </section>
+      {isSmallScreen ? <Footerformobile /> : <Footer/>}
+    </div>
   );
 }
 

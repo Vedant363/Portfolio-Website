@@ -1,9 +1,9 @@
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import React from 'react';
+import React from 'react'
 
-const Footer = () => {
+const Footerformobile = () => {
   return (
-    <footer className="rounded-full w-1/3 ml-[35%] bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-gray-300 py-3 mt-10 shadow-lg shadow-gray-700">
+    <div>
+      <footer className="footerformobile w-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-gray-300 py-4 mt-1 shadow-lg shadow-gray-700">
       <div className="container mx-auto px-4">
         <div className="w-full gap-6 flex flex-row justify-center items-center">
         <a href="https://github.com/Vedant363" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
@@ -26,7 +26,8 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+    </div>
+  )
+}
 
-export default Footer;
+export default Footerformobile
