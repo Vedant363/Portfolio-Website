@@ -17,7 +17,7 @@ const renderContent = {
             Hi, I am <span className='font-semibold'>Vedant</span> 👋🏼
             <br />
             <br />
-            A Full Stack Developer
+            Full Stack Developer
         </h1>
     ),
     2: (

@@ -125,7 +125,7 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .header-fixed-small.dark-theme{
-    @apply flex bg-gray-300 justify-between items-center sm:px-16 px-8 py-4 w-full h-[62px] fixed top-0 z-50 right-0;
+    @apply flex bg-slate-700 justify-between items-center sm:px-16 px-8 py-4 w-full h-[62px] fixed top-0 z-50 right-0;
   }
 
   .footer {

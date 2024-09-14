@@ -60,7 +60,7 @@ const Home = () => {
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
   return (
-    <section className="w-[385px] h-[720px] sm:w-full sm:h-screen relative">
+    <section className="w-full h-screen relative overflow-hidden">
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <HomeInfo currentStage={currentStage} />}
       </div>
@@ -94,7 +94,7 @@ const Home = () => {
         </Suspense>
       </Canvas>
 
-      <div className="absolute bottom-2 left-2">
+      <div className="absolute bottom-5 left-2">
         {!isPlayingMusic && <img src= {arrowdown} alt="click here" className="w-9 h-3 bouncing"></img>}
         <img src={!isPlayingMusic ? soundoff : soundon} alt="sound" className="w-10 h-10 cursor-pointer object-contain" onClick={()=>setIsPlayingMusic(!isPlayingMusic)}/>
       </div>

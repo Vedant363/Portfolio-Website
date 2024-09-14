@@ -67,7 +67,7 @@ const Navbar = () => {
       <header className={`${isSmallScreen ? smallHeaderSize : normalHeaderSize } ${theme}-theme relative`}>
       <NavLink
         to="/"
-        className={`${isScrolled ? 'h-7' : 'h-10'} ${isSmallScreen ? 'mt-1' : ''} rounded-lg bg-white flex items-center justify-center font-bold shadow-md transition-all duration-300`}
+        className={`${isScrolled ? 'h-7' : 'h-10'} ${isSmallScreen ? 'mt-2' : ''} rounded-lg bg-white flex items-center justify-center font-bold shadow-md transition-all duration-300`}
         style={{ width: isSmallScreen ? smallScreenWidth : normalWidth }} 
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
