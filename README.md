@@ -14,39 +14,10 @@ The website has been optimized for performance and scored well in Lighthouse aud
 
 ![Lighthouse Scores](public/seo.png)
 
-## Installation and Setup
-
-To run this project locally, follow these steps:
-
-1. **Clone the repository:**
-    ```bash
-    git clone https://github.com/yourusername/your-repository.git
-    ```
-
-2. **Navigate to the project directory:**
-    ```bash
-    cd your-repository
-    ```
-
-3. **Install dependencies:**
-    ```bash
-    npm install
-    ```
-
-4. **Start the development server:**
-    ```bash
-    npm run dev
-    ```
-
-5. **Open your browser and go to:**
-    ```
-    http://localhost:3000
-    ```
-
 ## Deployment
 
-The website is deployed and can be accessed at [vercel](https://vedantghumade-portofolio.vercel.app/).
+The website is deployed and can be accessed at [Vercel](https://vedantghumade-portofolio.vercel.app/).
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License.
