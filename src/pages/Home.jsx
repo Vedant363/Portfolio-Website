@@ -1,102 +1,121 @@
-import {useState, Suspense, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo, useCallback } from "react"
 import { Canvas } from "@react-three/fiber"
+import { Suspense } from "react"
 import Loader from "../components/Loader"
 import Island from "../models/Island"
 import Sky from "../models/Sky"
 import Bird from "../models/Bird"
 import Plane from "../models/Plane"
 import HomeInfo from "../components/HomeInfo"
-
-import sakura from "../assets/sakura.mp3"
 import { soundoff, soundon, arrowdown } from "../assets/icons"
 
+// Lazy load audio
+const sakura = () => import("../assets/sakura.mp3").then(module => module.default)
+
 const Home = () => {
-  const audioRef = useRef(new Audio(sakura));
-  audioRef.current.volume = 0.4;
-  audioRef.current.loop = true;
-  const [isRotating, setIsRotating] = useState(false);
-  const [currentStage, setCurrentStage] = useState(1);
-
-  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const audioRef = useRef(null)
+  const [isRotating, setIsRotating] = useState(false)
+  const [currentStage, setCurrentStage] = useState(1)
+  const [isPlayingMusic, setIsPlayingMusic] = useState(false)
   
-  useEffect(()=>{
-    if(isPlayingMusic){
-      audioRef.current.play();
+  useEffect(() => {
+    async function loadAudio() {
+      if (!audioRef.current) {
+        const audioModule = await sakura()
+        audioRef.current = new Audio(audioModule)
+        audioRef.current.volume = 0.4
+        audioRef.current.loop = true
+      }
     }
+    loadAudio()
+  }, [])
 
-    return () => {
-      audioRef.current.pause();
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlayingMusic) {
+        audioRef.current.play()
+      } else {
+        audioRef.current.pause()
+      }
     }
-  },[isPlayingMusic])
+  }, [isPlayingMusic])
 
-  const adjustIslanForScreenSize = () =>{
-    let screenScale = null;
-    let screenPosition = [0, -6.5, -43];
-    let rotation = [0.1,4.7,0];
-
-    if(window.innerWidth < 768){
-      screenScale = [0.4,0.5,0.5];
-      screenPosition = [0, -6.5, -43];
-    }else{
-      screenScale = [1,1,1];
+  const adjustIslandForScreenSize = useCallback(() => {
+    let screenScale = null
+    let screenPosition = [0, -6.5, -43]
+    let rotation = [0.1, 4.7, 0]
+    
+    if (window.innerWidth < 768) {
+      screenScale = [0.4, 0.5, 0.5]
+    } else {
+      screenScale = [1, 1, 1]
     }
-    return [screenScale, screenPosition, rotation];
-  } 
+    
+    return [screenScale, screenPosition, rotation]
+  }, [])
 
-  const adjustPlaneForScreenSize = () =>{
-    let screenScale, screenPosition;
-
-    if(window.innerWidth < 768){
-      screenScale = [1.0, 1.0, 1.0];
-      screenPosition = [0, -1.5, 0];
-    }else{
-      screenScale = [3,3,3];
-      screenPosition=[0, -4, -4];
+  const adjustPlaneForScreenSize = useCallback(() => {
+    let screenScale, screenPosition
+    
+    if (window.innerWidth < 768) {
+      screenScale = [1.0, 1.0, 1.0]
+      screenPosition = [0, -1.5, 0]
+    } else {
+      screenScale = [3, 3, 3]
+      screenPosition = [0, -4, -4]
     }
-    return [screenScale, screenPosition];
-  } 
+    
+    return [screenScale, screenPosition]
+  }, [])
 
-  const [islandScale, islandPosition, islandRotation] = adjustIslanForScreenSize();
-  const [planeScale, planePosition] = adjustPlaneForScreenSize();
+  const [islandScale, islandPosition, islandRotation] = useMemo(() => adjustIslandForScreenSize(), [adjustIslandForScreenSize])
+  const [planeScale, planePosition] = useMemo(() => adjustPlaneForScreenSize(), [adjustPlaneForScreenSize])
+
+  const toggleAudio = () => setIsPlayingMusic(!isPlayingMusic)
 
   return (
     <section className="w-full h-screen relative overflow-hidden">
-      <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-        {currentStage && <HomeInfo currentStage={currentStage} />}
-      </div>
+      {currentStage && (
+        <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
+          <HomeInfo currentStage={currentStage} />
+        </div>
+      )}
       <Canvas 
-      className={`w-[385px] h-[720px] sm:w-full sm:h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
-      camera={{near: 0.1, far: 1000}}
+        className={`w-[385px] h-[720px] sm:w-full sm:h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
+        camera={{ near: 0.1, far: 1000 }}
       >
         <Suspense fallback={<Loader />}>
-
-          <directionalLight position={[1,1,1]} intensity={2}/>
-          <ambientLight intensity={0.5}/>
-          <hemisphereLight skyColor={"#b1e1ff"} groundColor={"#000000"} intensity={1}/> 
-
+          <directionalLight position={[1, 1, 1]} intensity={2} />
+          <ambientLight intensity={0.5} />
+          <hemisphereLight skyColor="#b1e1ff" groundColor="#000000" intensity={1} />
           <Bird />
-          <Sky isRotating={isRotating}/>
+          <Sky isRotating={isRotating} />
           <Island
-             position={islandPosition}
-             scale={islandScale}
-             rotation={islandRotation}
-             isRotating={isRotating}
-             setIsRotating={setIsRotating}
-             setCurrentStage={setCurrentStage}
+            position={islandPosition}
+            scale={islandScale}
+            rotation={islandRotation}
+            isRotating={isRotating}
+            setIsRotating={setIsRotating}
+            setCurrentStage={setCurrentStage}
           />
           <Plane
-             isRotating={isRotating}
-             scale={planeScale}
-             position={planePosition}
-             rotation={[0, 20, 0]}
+            isRotating={isRotating}
+            scale={planeScale}
+            position={planePosition}
+            rotation={[0, 20, 0]}
           />
-          
         </Suspense>
       </Canvas>
-
       <div className="absolute bottom-5 left-2">
-        {!isPlayingMusic && <img src= {arrowdown} alt="click here" className="w-9 h-3 bouncing"></img>}
-        <img src={!isPlayingMusic ? soundoff : soundon} alt="sound" className="w-10 h-10 cursor-pointer object-contain" onClick={()=>setIsPlayingMusic(!isPlayingMusic)}/>
+        {!isPlayingMusic && (
+          <img src={arrowdown} alt="click here" className="w-9 h-3 bouncing" />
+        )}
+        <img
+          src={isPlayingMusic ? soundon : soundoff}
+          alt="sound"
+          className="w-10 h-10 cursor-pointer object-contain"
+          onClick={toggleAudio}
+        />
       </div>
     </section>
   )

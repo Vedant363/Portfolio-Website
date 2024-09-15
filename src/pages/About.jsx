@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense, useMemo } from 'react';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-
-import { skills, proglangs, experiences, education } from '../constants'
-import CTA from '../components/CTA';
-import DownloadResume from '../components/DownloadResume';
-import Footer from '../components/Footer';
+import { skills, proglangs, education } from '../constants'
 import { useTheme } from '../ThemeContext';
-import Footerformobile from '../components/Footerformobile';
+const CTA = lazy(() => import('../components/CTA'));
+const Footer = lazy(() => import('../components/Footer'));
+const Footerformobile = lazy(() => import('../components/Footerformobile'));
+const DownloadResume = lazy(() => import('../components/DownloadResume'));
 
 const About = () => {
    const { theme } = useTheme();
    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
 
    useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.scrollY !== 0) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, []);
-   
+  
    useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 768);
@@ -25,6 +26,10 @@ const About = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const memoizedSkills = useMemo(() => skills, []);
+  const memoizedProglangs = useMemo(() => proglangs, []);
+  const memoizedEducation = useMemo(() => education, []);
 
   return (
     <div className={`${isSmallScreen ? '' : 'pb-5'}`}>
@@ -48,7 +53,7 @@ const About = () => {
         <h3 className={`subhead-text ${theme}-subheadtext`}>Skills</h3>
 
         <div className="mt-16 flex flex-wrap gap-12">
-          {skills.map((skill, index) => (
+          {memoizedSkills.map((skill, index) => (
             <div className={`block-container ${isSmallScreen ? 'w-[70px]' : 'w-20'}  h-20`}>
               <div className="btn-back rounded-xl" />
               <div className="btn-front rounded-xl flex justify-center items-center">
@@ -56,6 +61,7 @@ const About = () => {
                   src={skill.imageUrl}
                   alt={skill.name}
                   className="w-1/2 h-1/2 object-contain"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -67,7 +73,7 @@ const About = () => {
         <h3 className={`subhead-text ${theme}-subheadtext`}>Programming Languages</h3>
 
         <div className="mt-16 flex flex-wrap gap-12">
-          {proglangs.map((skill, index) => (
+          {memoizedProglangs.map((skill, index) => (
             <div className={`block-container ${isSmallScreen ?  'w-[120px]' : 'w-20'}  h-20`}>
               <div className="btn-back rounded-xl" />
               <div className="btn-front rounded-xl flex justify-center items-center">
@@ -75,6 +81,7 @@ const About = () => {
                   src={skill.imageUrl}
                   alt={skill.name}
                   className="w-1/2 h-1/2 object-contain"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -88,7 +95,7 @@ const About = () => {
 
       <div className="mt-7 flex">
       <VerticalTimeline>
-      {education.map((edu, index) => (
+      {memoizedEducation.map((edu, index) => (
         <VerticalTimelineElement
           key={edu.title}
           date={edu.year}
@@ -121,12 +128,18 @@ const About = () => {
       </div>
 
        <hr className='border-slate-200 mt-7' />
-       <DownloadResume screenSize={isSmallScreen} />
+       <Suspense fallback={<div>Loading...</div>}>
+          <DownloadResume screenSize={isSmallScreen} />
+       </Suspense>
        <hr className='border-slate-200 mt-7' />
-       <CTA />
+       <Suspense fallback={<div>Loading...</div>}>
+          <CTA />
+       </Suspense>
        <hr className='border-slate-200 mt-7' />
     </section>
-       {isSmallScreen ? <Footerformobile /> : <Footer />}
+    <Suspense fallback={<div>Loading...</div>}>
+        {isSmallScreen ? <Footerformobile /> : <Footer />}
+    </Suspense>
     </div>
   );
 }

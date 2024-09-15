@@ -1,14 +1,15 @@
-import React, { Suspense, useRef, useState, useEffect } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { Suspense, useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
-
-import Fox from '../models/Fox';
-import Loader from '../components/Loader';
 import useAlert from '../hooks/useAlert';
-import Alert from '../components/Alert';
-import Footer from '../components/Footer';
 import { useTheme } from '../ThemeContext';
-import Footerformobile from '../components/Footerformobile';
+
+// Lazy load components
+const Fox = React.lazy(() => import('../models/Fox'));
+const Loader = React.lazy(() => import('../components/Loader'));
+const Alert = React.lazy(() => import('../components/Alert'));
+const Footer = React.lazy(() => import('../components/Footer'));
+const Footerformobile = React.lazy(() => import('../components/Footerformobile'));
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const { theme } = useTheme();
@@ -18,27 +19,24 @@ const Contact = () => {
   const [currentAnimation, setCurrentAnimation] = useState('idle');
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
    
-  useEffect(() => {
-   const handleResize = () => {
-     setIsSmallScreen(window.innerWidth < 768);
-   };
+  const { alert, showAlert, hideAlert } = useAlert();
 
-   window.addEventListener('resize', handleResize);
-   return () => window.removeEventListener('resize', handleResize);
- }, []);
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const { alert, showAlert, hideAlert } = useAlert();
+  const handleChange = useCallback((e) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  }, []);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleFocus = () => setCurrentAnimation('walk');
-  const handleBlur = () => setCurrentAnimation('idle');
+  const handleFocus = useCallback(() => setCurrentAnimation('walk'), []);
+  const handleBlur = useCallback(() => setCurrentAnimation('idle'), []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,26 +83,24 @@ const Contact = () => {
       });
   };
 
-  return (
+  const inputClass = useMemo(() => `input ${theme}-input`, [theme]);
+  const textareaClass = useMemo(() => `textarea ${theme}-textarea resize-none overflow-hidden`, [theme]);
 
+  return (
     <div className={`fullcontainer glassmorphism ${isSmallScreen ? '' : 'pb-5'}`}>
-      <section className="relative flex lg:flex-row flex-col max-container ">
+      <section className="relative flex lg:flex-row flex-col max-container">
         {alert.show && <Alert {...alert} />}
 
         <div className={`formcontainer ${theme}-formcontainer flex-1 min-w-[50%] flex flex-col`}>
           <h1 className="head-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 bg-clip-text text-transparent">Get In Touch</h1>
 
-          <form
-            ref={formRef} 
-            className="w-full flex flex-col gap-7 mt-11"
-            onSubmit={handleSubmit} 
-          >
+          <form ref={formRef} className="w-full flex flex-col gap-7 mt-11" onSubmit={handleSubmit}>
             <label className={`${theme === 'light' ? 'text-black-500' : 'text-white'} font-semibold`}>
               Name
               <input
                 type="text"
                 name="name"
-                className={`input ${theme}-input`}
+                className={inputClass}
                 placeholder="Enter your name"
                 required
                 value={form.name}
@@ -118,7 +114,7 @@ const Contact = () => {
               <input
                 type="email"
                 name="email"
-                className={`input ${theme}-input`}
+                className={inputClass}
                 placeholder="Enter your Email"
                 required
                 value={form.email}
@@ -132,7 +128,7 @@ const Contact = () => {
               <textarea
                 name="message"
                 rows={4}
-                className={`textarea ${theme}-textarea resize-none overflow-hidden`} 
+                className={textareaClass}
                 placeholder="Enter your Message"
                 required
                 value={form.message}
@@ -175,7 +171,9 @@ const Contact = () => {
         </div>
       </section>
       <br />
-      {isSmallScreen ? <Footerformobile/> : <Footer />}
+      <Suspense fallback={<div>Loading...</div>}>
+        {isSmallScreen ? <Footerformobile /> : <Footer />}
+      </Suspense>
     </div>
   );
 };
