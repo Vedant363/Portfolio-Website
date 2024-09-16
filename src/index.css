@@ -491,12 +491,14 @@ body:has(.card[data-color="green"]:hover) {
 
 .running-gradient-text-2 {
   font-weight: bolder;
-  background: url('/gradient.webp'); 
+  /* background: url('/gradient.webp');  */
+  background: linear-gradient(to right, rgb(162, 0, 255), rgb(255, 0, 225) , rgb(255, 157, 0), rgb(0, 94, 255));
   background-size: cover; 
   -webkit-background-clip: text; 
   background-clip: text;
   color: transparent;
   background-position: center; 
+  animation: gradient-animation 2s ease infinite;
 }
 
 .messagecontainer {
