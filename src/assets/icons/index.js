@@ -40,6 +40,9 @@ import moon from './moon.svg'
 import githublight from './githublight.svg'
 import arrowdown from './arrowdown.svg'
 import menu from './menu.svg'
+import submit from './submit.svg'
+import copy from './copy.svg'
+import trash from './trash.svg'
 
 export {
     css,
@@ -83,5 +86,8 @@ export {
     moon,
     githublight,
     arrowdown,
-    menu
+    menu,
+    submit,
+    copy,
+    trash
 }

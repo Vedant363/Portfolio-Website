@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="rounded-full w-1/3 ml-[35%] bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-gray-300 py-3 mt-10 shadow-lg shadow-gray-700">
+    <footer className="rounded-full w-1/3 ml-[35%] bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-gray-300 py-3 mt-[60px] shadow-lg shadow-gray-700">
       <div className="container mx-auto px-4">
         <div className="w-full gap-6 flex flex-row justify-center items-center">
         <a href="https://github.com/Vedant363" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">

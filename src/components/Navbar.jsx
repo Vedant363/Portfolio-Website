@@ -117,6 +117,9 @@ const Navbar = () => {
           <NavLink to="/contact" className={({ isActive }) => (isActive ? 'blue-gradient_text' : theme === 'light' ? 'text-black' : 'text-white')}>
             Contact
           </NavLink>
+          <NavLink to="/chat" className={({ isActive }) => (isActive ? 'blue-gradient_text' : theme === 'light' ? 'running-gradient-text-2' : 'running-gradient-text-2')}>
+            Chat with AI  
+          </NavLink>
           <img
             onClick={toggleTheme}
             src={theme === 'light' ? moon : sun}

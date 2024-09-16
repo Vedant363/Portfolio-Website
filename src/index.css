@@ -170,6 +170,19 @@ body:has(.card[data-color="green"]:hover) {
     @apply bg-gradient-to-r from-[#00c6ff] to-[#0072ff] bg-clip-text text-transparent;
   }
 
+  .orange-gradient_text {
+    @apply bg-gradient-to-r from-[#ff7f50] to-[#ff4500] bg-clip-text text-transparent;
+  }
+
+  .red-gradient_text {
+    @apply bg-gradient-to-r from-[#d13737] to-[#ff0000] bg-clip-text text-transparent font-extrabold;
+  }
+  
+  .green-gradient_text {
+    @apply bg-gradient-to-r from-[#00ff7f] to-[#004d00] bg-clip-text text-transparent;
+  }
+  
+    
   .input {
     @apply bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card outline-none;
   }
@@ -279,7 +292,6 @@ body:has(.card[data-color="green"]:hover) {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 1rem;
-  /* Ensure it's visible and not hidden or positioned off-screen */
 }
 
 
@@ -440,7 +452,6 @@ body:has(.card[data-color="green"]:hover) {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Define keyframes for the bouncing effect */
 @keyframes bounce {
   0%, 100% {
     transform: translateY(0);
@@ -450,8 +461,136 @@ body:has(.card[data-color="green"]:hover) {
   }
 }
 
-/* Apply animation to the arrow image */
 .bouncing {
   animation: bounce 1s infinite;
 }
 
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.running-gradient-text {
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(to right, red, orange , cyan, blue);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient-animation 2s ease infinite;
+}
+
+.running-gradient-text-2 {
+  font-weight: bolder;
+  background: url('/gradient.webp'); 
+  background-size: cover; 
+  -webkit-background-clip: text; 
+  background-clip: text;
+  color: transparent;
+  background-position: center; 
+}
+
+.messagecontainer {
+  display: flex;
+  align-items: flex-start; 
+  width: 100%; 
+  margin-top: 60px;
+}
+
+.scroll-hidden {
+  overflow-y: hidden;
+}
+
+.scroll-visible {
+  overflow-y: auto;
+}
+
+.scroll-visible::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.scroll-visible::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners of the scrollbar thumb */
+  border: 2px solid transparent; /* Optional: Add space around the thumb */
+}
+
+.scroll-visible::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color when hovered */
+}
+
+.scroll-visible::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+  border-radius: 10px; /* Rounded corners of the track */
+}
+
+.loader-container {
+  position: fixed; /* Fixed position to overlay the loader */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+  z-index: 9999; /* High z-index to ensure it's on top */
+}
+
+.loader-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.loader-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #3498db; /* Loader color */
+  border-radius: 50%;
+  animation: loader-animation 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #3498db transparent transparent transparent;
+}
+
+.loader-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.loader-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.loader-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes loader-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-text {
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
