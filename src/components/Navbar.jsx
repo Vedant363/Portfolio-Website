@@ -48,8 +48,8 @@ const Navbar = () => {
   }, [isScrolled, isHovered]);
 
   const normalTextColor = useMemo(() => {
-    return isScrolled ? (isHovered ? 'text-black' : 'blue-gradient_text') : (isHovered ? 'text-black' : 'blue-gradient_text');
-  }, [isScrolled, isHovered]);
+    return isScrolled ? (isHovered ? (theme === 'light' ? 'text-black' : 'text-white')  : 'blue-gradient_text') : (isHovered ? (theme === 'light' ? 'text-black' : 'text-white') : 'blue-gradient_text');
+  }, [isScrolled, isHovered, theme]);
 
   const smallScreenText = useMemo(() => {
     return isScrolled ? 'Vedant Ghumade' : 'VG';
@@ -75,7 +75,7 @@ const Navbar = () => {
     <header className={`${isSmallScreen ? smallHeaderSize : normalHeaderSize} ${theme}-theme relative`}>
       <NavLink
         to="/"
-        className={`${isScrolled ? 'h-7' : 'h-10'} ${isSmallScreen ? 'mt-2' : ''} rounded-lg bg-white flex items-center justify-center font-bold shadow-md transition-all duration-300`}
+        className={`${isScrolled ? 'h-7' : 'h-10'} ${isSmallScreen ? 'mt-2' : ''} rounded-lg ${theme === 'light' ? 'bg-white' : 'bg-slate-700'} flex items-center justify-center font-bold shadow-md shadow-blue-800 transition-all duration-300`}
         style={{ width: isSmallScreen ? smallScreenWidth : normalWidth }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

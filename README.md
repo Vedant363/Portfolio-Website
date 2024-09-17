@@ -7,6 +7,7 @@ Welcome to my portfolio website! This site showcases my projects and skills.
 - **React.js + Vite Framework**: For building a fast and efficient user interface.
 - **Three.js**: For creating 3D graphics and interactive elements.
 - **Email.js**: For handling email functionality.
+- **Firebase**: For ChatwithAI Integration.
 
 ## Optimization
 

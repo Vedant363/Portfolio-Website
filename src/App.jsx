@@ -10,6 +10,7 @@ const About = lazy(() => import('./pages/About'));
 const Projects = lazy(() => import('./pages/Projects'));
 const Contact = lazy(() => import('./pages/Contact'));
 const ChatwithAI = lazy(() => import('./components/ChatwithAI'));
+const Counter = lazy(() => import('./lib/Counter'));
 
 const App = () => {
   return (
@@ -42,7 +43,7 @@ const AppContent = () => {
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/chat" element={<ChatwithAI />} />
+          <Route path="/chat" element={<Counter />} />
         </Routes>
       </Suspense>
     </main>

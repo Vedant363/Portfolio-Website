@@ -4,6 +4,8 @@ import { useTheme } from '../ThemeContext';
 import { submit, copy, trash } from '../assets/icons';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import useAlert from '../hooks/useAlert';
+import { doc, updateDoc, increment } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 const Markdown = lazy(() => import('react-markdown'));
 const Footer = lazy(() => import('./Footer'));
@@ -11,7 +13,7 @@ const Footerformobile = lazy(() => import('./Footerformobile'));
 const Loader2 = lazy(() => import('./Loader2'));
 const Alert = lazy(() => import('./Alert'));
 
-const ChatwithAI = () => {
+const ChatwithAI = ({ count, setCount, setDate }) => {
   const textareaRef = useRef(null);
   const { theme } = useTheme();
   const [question, setQuestion] = useState("");
@@ -20,6 +22,7 @@ const ChatwithAI = () => {
   const [copyStatus, setCopyStatus] = useState(false); 
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
   const { alert, showAlert, hideAlert } = useAlert();
+  const [currentDate, setCurrentDate] = useState(""); 
 
   useEffect(() => {
     const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
@@ -29,6 +32,14 @@ const ChatwithAI = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentYear = today.getFullYear();
+    const dateString = `${currentDay}${currentYear}`;
+    setCurrentDate(dateString);
   }, []);
 
   useEffect(() => {
@@ -66,46 +77,64 @@ const ChatwithAI = () => {
     }, 2000);
   };
 
+  const incrementCount = async () => {
+    const docRef = doc(db, 'count', import.meta.env.VITE_FIREBASE_DOCUMENT_ID);
+    try {
+      await updateDoc(docRef, {
+        count: increment(1), 
+        date: currentDate 
+      });
+      setCount(prevCount => prevCount + 1);
+      setDate(currentDate);
+    } catch (error) {
+      console.error('Error updating document:', error);
+    }
+  };
+
   const handleQuestion = (e) => {
     setQuestion(e.target.value);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = async (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault(); 
-      handleChange();
+      await incrementCount();
+      if(count <= 20){
+        await handleChange();
+      }
     }
   };
+
 
   const handleDelete = () => {
     setAnswer('');
   };
 
   async function handleChange() {
-    console.log('Question:', question);
-    
     setLoadingAns(true);
-    try {
-      const response = await axios({
-        url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=' + import.meta.env.VITE_GEMINI_API_KEY,
-        method: 'POST',
-        data: { "contents": [{ "parts": [{ "text": question }] }] },
-        headers: { 'Content-Type': 'application/json' }
-      });
-      console.log('Response:', response.data.candidates[0].content.parts[0].text);
-      setAnswer(response.data.candidates[0].content.parts[0].text);
-      setQuestion('');
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoadingAns(false);  
-    }
+    if(count <= 20){
+      try {
+        const response = await axios({
+          url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=' + import.meta.env.VITE_GEMINI_API_KEY,
+          method: 'POST',
+          data: { "contents": [{ "parts": [{ "text": question }] }] },
+          headers: { 'Content-Type': 'application/json' }
+        });
+        // console.log(response.data.candidates[0].content.parts[0].text);
+        setAnswer(response.data.candidates[0].content.parts[0].text);
+        setQuestion('');
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoadingAns(false);  
+      }
+    } 
   }
 
   const isScrollable = textareaRef.current && textareaRef.current.scrollHeight > textareaRef.current.clientHeight;
 
   return (
-    <div className={`fullcontainer ${isSmallScreen ? "" : "pb-5"}`}>
+    <div className={`fullcontainer ${isSmallScreen ? "" : "pb-5"} `}>
       <section className="max-container flex-col">
         {alert.show && <Alert {...alert} />}
         <h1 className="running-gradient-text">Chat with AI</h1>
@@ -119,7 +148,7 @@ const ChatwithAI = () => {
             className={`p-2.5 ${theme === "light" ? "bg-slate-300" : "bg-slate-500"} outline-none w-full resize-none cursor-text rounded-l-lg ${isScrollable ? "scroll-visible" : "scroll-hidden"}`}
           />
           <img
-            onClick={handleChange}
+            onClick={async() => { await incrementCount(); await handleChange(); }}
             src={submit}
             alt="Submit"
             className={`h-11 w-11 cursor-pointer ${theme === "light" ? "bg-slate-400" : "bg-slate-600"} rounded-r-lg`}
