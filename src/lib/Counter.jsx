@@ -8,6 +8,7 @@ import { useTheme } from '../ThemeContext';
 const Counter = () => {
     const { theme } = useTheme();
     const [count, setCount] = useState(null);
+    const [maxcount, setMaxCount] = useState(null);
     const [date, setDate] = useState("");
     const [currentDate, setCurrentDate] = useState(""); 
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
@@ -34,6 +35,8 @@ const Counter = () => {
           if (docSnap.exists()) {
             setCount(docSnap.data().count);
             setDate(docSnap.data().date);
+            setMaxCount(docSnap.data().maxcount);
+            console.log(maxcount);
           } else {
             console.log('No such document!');
           }
@@ -68,7 +71,7 @@ const Counter = () => {
   
     return (
       <div>
-        {count >= 20 ? (
+        {count >= maxcount ? (
            <div className="flex items-center justify-center h-screen ${theme === 'light' ? 'bg-slate-200' : 'bg-black'}">
            <h1 className={`${isSmallScreen ? 'text-2sm' : 'text-2xl'} font-bold text-red-600 ${theme === 'light' ? 'bg-slate-200' : 'bg-black'} p-6 border-2 border-red-600 rounded-lg shadow-lg shadow-red-500`}>
             ☹️ Request Limit Exceeded for Today
