@@ -1,9 +1,10 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { doc, getDoc, updateDoc, increment } from 'firebase/firestore'; 
+import { doc, getDoc, updateDoc } from 'firebase/firestore'; 
 import { db } from './firebase';
 import ChatwithAI from '../components/ChatwithAI';
 import { useTheme } from '../ThemeContext';
+import Loader from '../components/Loader2';
 
 const Counter = () => {
     const { theme } = useTheme();
@@ -12,8 +13,8 @@ const Counter = () => {
     const [date, setDate] = useState("");
     const [currentDate, setCurrentDate] = useState(""); 
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+    const [loading, setLoading] = useState(true); // Loading state
 
-  
     useEffect(() => {
       const today = new Date();
       const currentDay = today.getDate();
@@ -22,9 +23,6 @@ const Counter = () => {
       setCurrentDate(dateString);
     }, []);
 
-    useEffect(() => {
-    },[count]);
-  
     useEffect(() => {
       if (!currentDate) return; 
   
@@ -42,12 +40,14 @@ const Counter = () => {
           }
         } catch (error) {
           console.error('Error getting document:', error);
+        } finally {
+          setLoading(false); // Data is loaded
         }
       };
   
       fetchData();
-    }, [currentDate]); 
-    
+    }, [currentDate]);
+
     useEffect(() => {
       if (!date || !currentDate) return; 
   
@@ -68,11 +68,19 @@ const Counter = () => {
         resetCount();
       }
     }, [date, currentDate]); 
-  
+
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <h1 className="text-xl font-bold"><Loader /></h1>
+        </div>
+      );
+    }
+
     return (
       <div>
         {count >= maxcount ? (
-           <div className="flex items-center justify-center h-screen ${theme === 'light' ? 'bg-slate-200' : 'bg-black'}">
+           <div className={`flex items-center justify-center h-screen ${theme === 'light' ? 'bg-slate-200' : 'bg-black'}`}>
            <h1 className={`${isSmallScreen ? 'text-2sm' : 'text-2xl'} font-bold text-red-600 ${theme === 'light' ? 'bg-slate-200' : 'bg-black'} p-6 border-2 border-red-600 rounded-lg shadow-lg shadow-red-500`}>
             ☹️ Request Limit Exceeded for Today
            </h1>
@@ -88,4 +96,4 @@ const Counter = () => {
     );
   };
 
-export default Counter
+export default Counter;
