@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Welcome to my portfolio website! This site showcases my projects and skills.
+Welcome to my portfolio website! 
 
 ## Technologies Used
 
