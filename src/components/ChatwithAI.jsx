@@ -6,8 +6,11 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import useAlert from '../hooks/useAlert';
 import { doc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '../lib/firebase';
+import {createRoot} from 'react-dom/client';
+import Markdown from 'react-markdown';
+import AnswerContainer from './AnswerContainer';
 
-const Markdown = lazy(() => import('react-markdown'));
+// const Markdown = lazy(() => import('react-markdown'));
 const Footer = lazy(() => import('./Footer'));
 const Footerformobile = lazy(() => import('./Footerformobile'));
 const Loader2 = lazy(() => import('./Loader2'));
@@ -17,7 +20,7 @@ const ChatwithAI = ({ count, setCount, setDate }) => {
   const textareaRef = useRef(null);
   const { theme } = useTheme();
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");  
+  const [answer, setAnswer] = useState(""); 
   const [loadingans, setLoadingAns] = useState(false);
   const [copyStatus, setCopyStatus] = useState(false); 
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
@@ -46,7 +49,7 @@ const ChatwithAI = ({ count, setCount, setDate }) => {
     if (textareaRef.current) {
       const lines = textareaRef.current.value.split('\n').length;
       if (lines <= 5) {
-        textareaRef.current.style.height = '5px'; 
+        textareaRef.current.style.height = '0.313rem'; 
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; 
       }
     }
@@ -159,7 +162,7 @@ const ChatwithAI = ({ count, setCount, setDate }) => {
         ) : (
           answer && ( 
             <div className='relative answerfullcontainer flex-col'>
-              <div className={`absolute top-[-45px] right-1 flex items-center ${theme === 'light' ? 'bg-white' : 'bg-black-500'} rounded-lg overflow-hidden shadow-sm shadow-blue-500 border-2 border-blue-600`}>
+              <div className={`absolute top-[-2.813rem] right-1 flex items-center ${theme === 'light' ? 'bg-white' : 'bg-black-500'} rounded-lg overflow-hidden shadow-sm shadow-blue-500 border-2 border-blue-600`}>
                 <CopyToClipboard text={stripMarkdown(answer)} onCopy={onCopyText}>
                   <button className="p-1">
                     <img src={copy} alt="Copy Text" className='h-7' />
@@ -169,11 +172,7 @@ const ChatwithAI = ({ count, setCount, setDate }) => {
                   <img src={trash} alt="Delete" className='h-7' />
                 </button>
               </div>
-              <div className={`answercontainer p-4 mt-[75px] h-auto w-full border-2 border-blue-600 shadow-lg shadow-blue-500 rounded-lg`}>
-                <Markdown className={`${theme === "light" ? "text-black" : "text-white"}`}>
-                  {answer}
-                </Markdown>
-              </div>
+              <AnswerContainer answer={answer} theme={theme} />
             </div>
           )
         )}

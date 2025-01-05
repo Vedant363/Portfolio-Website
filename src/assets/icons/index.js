@@ -43,6 +43,7 @@ import menu from './menu.svg'
 import submit from './submit.svg'
 import copy from './copy.svg'
 import trash from './trash.svg'
+import trafficlight from './trafficlight.svg'
 
 export {
     css,
@@ -89,5 +90,6 @@ export {
     menu,
     submit,
     copy,
-    trash
+    trash,
+    trafficlight
 }

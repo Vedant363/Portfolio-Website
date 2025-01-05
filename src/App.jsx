@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate  } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Navbar2 from "./components/Navbar2"; // Import your alternative navbar component
+import Navbar2 from "./components/Navbar2"; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ThemeProvider, useTheme } from "./ThemeContext";
 
@@ -25,6 +25,21 @@ const App = () => {
 const AppContent = () => {
   const { theme } = useTheme();
   const location = useLocation(); 
+  const navigate = useNavigate(); 
+
+  const hasVisitedAbout = localStorage.getItem('hasVisitedAbout') === 'true';
+
+  useEffect(() => {
+    if (location.pathname === '/' && !hasVisitedAbout) {
+      navigate('/about'); 
+    }
+  }, [location, hasVisitedAbout, navigate]);
+
+  useEffect(() => {
+    if (location.pathname === '/about') {
+      localStorage.setItem('hasVisitedAbout', 'true');
+    }
+  }, [location]);
 
   useEffect(() => {
     localStorage.setItem('current_theme', theme);
@@ -44,6 +59,7 @@ const AppContent = () => {
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/chat" element={<Counter />} />
+          <Route path="/z" element={<ChatwithAI />} />
         </Routes>
       </Suspense>
     </main>

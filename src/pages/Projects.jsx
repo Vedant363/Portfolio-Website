@@ -54,10 +54,11 @@ const Projects = () => {
         <div className="flex flex-wrap my-20 gap-16">
           {memoizedProjects.map((project, index) => (
             <div
-              className="border-2 border-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-lg shadow-md shadow-blue-500 p-6 lg:w-[400px] w-full transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500 hover:cursor-default"
+              className="border-2 border-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-lg shadow-md shadow-blue-500 p-6 lg:w-[26rem] lg:h-[22.5rem] w-full transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500 hover:cursor-default"
               key={index}
             >
-              <div className="block-container w-12 h-12">
+              {/* icon container */}
+              <div className="block-container w-12 h-12">  
                 <div className={`btn-back rounded-xl ${project.theme}`} />
                 <div className="btn-front rounded-xl flex justify-center items-center">
                   <img
@@ -68,7 +69,7 @@ const Projects = () => {
                   />
                 </div>
               </div>
-              <div className="mt-5 flex flex-col">
+              <div className="cont mt-5 flex flex-col lg:w-[22.813rem] lg:h-[15rem] justify-between">
                 <h4
                   className={`${
                     theme === "light" ? "" : "text-white"
@@ -84,7 +85,7 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                <div className="linkcontainer flex justify-between">
+                <div className="linkcontainer flex justify-between items-end">
                   {project.link ? (
                     <Link
                       to={project.link}
@@ -92,7 +93,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="font-semibold text-blue-600 inline-block"
                     >
-                      <div className="mt-5 flex gap-3 items-center font-poppins hover:text-yellow-400">
+                      <div className="mt-5 flex gap-3 items-center font-poppins hover:text-red-400">
                         Live Link
                         <img
                           src={arrow}

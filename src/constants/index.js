@@ -20,7 +20,8 @@ import {
     fms,
     todo,
     sun,
-    moon
+    moon,
+    trafficlight,
 } from "../assets/icons";
 
 export const buttons = [
@@ -167,6 +168,14 @@ export const education = [
 
 export const projects = [
     {
+        iconUrl: trafficlight,
+        theme: 'btn-back-yellow',
+        name: 'Vehicle Detection and Traffic Assessment',
+        description: 'Vehicle detection and traffic analysis system leveraging YOLOv11L, with data logging and dynamic visualization of traffic metrics.',
+        link: '',
+        githublink: 'https://github.com/Vedant363/Vehicle-Detection-and-Traffic-Assessment',
+    },
+    {
         iconUrl: ecom,
         theme: 'btn-back-blue',
         name: 'Urbanic - E-Commerce Website',
@@ -197,13 +206,5 @@ export const projects = [
         description: 'Flight Management System(FMS) is a Java-based application designed to manage flight records and employee details related to flight for companies.',
         link: '',
         githublink: 'https://github.com/Vedant363/Flight-Management-System',
-    },
-    {
-        iconUrl: todo,
-        theme: 'btn-back-green',
-        name: 'Todo Manager',
-        description: 'A React application designed to help users manage their tasks efficiently, it provides features to add, edit, delete, and mark tasks as completed.',
-        link: 'https://todo-manager-vedant363.netlify.app/',
-        githublink: 'https://github.com/Vedant363/Todo-Manager',
     }
 ];
