@@ -53,7 +53,7 @@ const AppContent = () => {
     switch (path) {
       case '/':
         return {
-          title: "Home Page | Vedant's Portfolio",
+          title: "Vedant's Portfolio",
           description: 'Welcome to the Home Page of my portfolio website! Feel free to explore.',
           image: import.meta.env.VITE_PUBLIC_URL + `/card.png`,
           url: import.meta.env.VITE_PUBLIC_URL + '/'
