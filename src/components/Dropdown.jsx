@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 const Dropdown = ({ isScrolled }) => {
   const { theme } = useTheme();
   return (
-    <div className={`absolute right-3 top mt-1 w-[140px] ${theme === 'light' ? 'bg-white' : 'bg-slate-700'} p-4 shadow-lg rounded-xl shadow-blue-600`}>
+    <div className={`absolute right-3 top mt-1 w-[8.75rem] ${theme === 'light' ? 'bg-white' : 'bg-slate-700'} p-4 shadow-lg rounded-xl shadow-blue-600`}>
       <nav className='flex flex-col gap-3 font-semibold'>
         <NavLink
           to="/about"

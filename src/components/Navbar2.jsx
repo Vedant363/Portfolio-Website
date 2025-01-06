@@ -111,7 +111,7 @@ const Navbar2 = () => {
           </div>
         </div>
       ) : (
-        <nav className={`flex ${isScrolled ? 'text-sm' : 'text-lg'} justify-center gap-7 font-medium h-11 w-[500px] ${theme === 'light' ? 'bg-white' : 'bg-black-500'} p-2 rounded-lg`}>
+        <nav className={`flex ${isScrolled ? 'text-sm' : 'text-lg'} justify-center gap-7 font-medium h-11 w-[31.25rem] ${theme === 'light' ? 'bg-white' : 'bg-black-500'} p-2 rounded-lg`}>
           <NavLink to="/about" className={({ isActive }) => (isActive ? 'blue-gradient_text' : theme === 'light' ? 'text-black' : 'text-white')}>
             About
           </NavLink>

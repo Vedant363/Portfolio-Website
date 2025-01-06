@@ -150,7 +150,7 @@ const Contact = () => {
           </form>
         </div>
 
-        <div className='imgcontainer lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]'>
+        <div className='imgcontainer lg:w-1/2 w-full lg:h-auto md:h-[34.375rem] h-[21.875rem]'>
           <Canvas
             camera={{ position: [0, 0, 5] }}
             fov={75}

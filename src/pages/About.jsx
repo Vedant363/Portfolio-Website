@@ -54,7 +54,7 @@ const About = () => {
 
         <div className="mt-16 flex flex-wrap gap-12">
           {memoizedSkills.map((skill, index) => (
-            <div className={`block-container ${isSmallScreen ? 'w-[70px]' : 'w-20'}  h-20`}>
+            <div className={`block-container ${isSmallScreen ? 'w-[4.375rem]' : 'w-20'}  h-20`}>
               <div className="btn-back rounded-xl" />
               <div className="btn-front rounded-xl flex justify-center items-center">
                 <img
@@ -74,7 +74,7 @@ const About = () => {
 
         <div className="mt-16 flex flex-wrap gap-12">
           {memoizedProglangs.map((skill, index) => (
-            <div className={`block-container ${isSmallScreen ?  'w-[120px]' : 'w-20'}  h-20`}>
+            <div className={`block-container ${isSmallScreen ?  'w-[7.5rem]' : 'w-20'}  h-20`}>
               <div className="btn-back rounded-xl" />
               <div className="btn-front rounded-xl flex justify-center items-center">
                 <img
