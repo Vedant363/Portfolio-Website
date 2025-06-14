@@ -1,6 +1,7 @@
 import React, { useEffect, useState, lazy, Suspense, useMemo } from 'react';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
+import GitHubCalendar from 'react-github-calendar';
 import { skills, proglangs, education } from '../constants'
 import { useTheme } from '../ThemeContext';
 const CTA = lazy(() => import('../components/CTA'));
@@ -126,6 +127,16 @@ const About = () => {
       ))}
     </VerticalTimeline>
       </div>
+
+      <hr className='border-slate-200 mt-7' />
+      <h3 className={`subhead-text ${theme}-subheadtext pt-5 pb-4`}>GitHub Contributions</h3>
+      <GitHubCalendar
+        username="Vedant363"
+        colorScheme={theme === 'dark' ? 'dark' : 'light'}
+        blockSize={17}
+        blockMargin={4}
+        fontSize={14}
+      />
 
        <hr className='border-slate-200 mt-7' />
        <Suspense fallback={<div>Loading...</div>}>

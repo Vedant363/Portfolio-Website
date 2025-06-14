@@ -146,23 +146,29 @@ export const education = [
     {
         title: "10th",
         iconBg: "#fbc3bc",
-        name: "St. John High School",
+        name: "St. John's High School (CBSE)",
         year: "2019",
         grade: "Percentage : 91.4%",
     },
     {
         title: "12th",
         iconBg: "#b7e4c7",
-        name: "Adarsh Sanskar Vidyalaya",
+        name: "Adarsh Sanskar Vidyalaya & Jr. College (MSBSHSE)",
         year: "2021",
         grade: "Percentage : 97.5%",
     },
     {
         title: "B.Tech in Computer Engineering",
         iconBg: "#a2d2ff",
-        name: "Pimpri Chinchwad College of Engineering",
-        year: "Pursuing",
-        grade: "CGPA : 8.26 (upto 6th semester)",
+        name: "Pimpri Chinchwad College of Engineering (PCCOE)",
+        year: "2025",
+        grade: "CGPA : 8.34",
+    },
+    {
+        title: "Software Engineer (A4 Analyst)",
+        iconBg: "#fdfd96",
+        name: "Capgemini",
+        year: "current",
     },
 ];
 
