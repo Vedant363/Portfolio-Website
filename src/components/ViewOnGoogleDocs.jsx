@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ViewOnGoogleDocs = () => {
-  const fileId = '1Ca2su3AB1dFmx1VjDduBV7nibaw3k09m'; 
+  const fileId = '15B_BBsqkH-FLEqPKnw24CDX5do_GBkA6'; 
   const viewUrl = `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
 
   return (
